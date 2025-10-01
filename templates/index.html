@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Downloader</title>
+</head>
+<body>
+    <h1>Pytube + Flask YouTube Downloader</h1>
+
+    <form action="/download" method="POST">
+        <label for="video_url">Enter YouTube Video URL:</label><br>
+        <input type="text" id="video_url" name="video_url" required size="50"><br><br>
+        <input type="submit" value="Download Video">
+    </form>
+
+    <p>The video will be downloaded in the highest available quality progressive MP4 format.</p>
+</body>
+</html>
