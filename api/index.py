@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, redirect
 from pytubefix import YouTube
 from io import BytesIO
 
@@ -20,14 +20,18 @@ def download_video():
 
         video_stream = yt.streams.get_highest_resolution()
 
-        if not video_stream:
+        '''if not video_stream:
             return 'Error: Could not find a suitable progressive MP4 stream.'
 
         buffer = BytesIO()
         video_stream.stream_to_buffer(buffer)
         buffer.seek(0)
 
-        return send_file(buffer, as_attachment=True, download_name=f"{yt.title}.mp4", mimetype='video/mp4')
+        return send_file(buffer, as_attachment=True, download_name=f"{yt.title}.mp4", mimetype='video/mp4')'''
+
+        direct_link = video_stream.url
+
+        return redirect(direct_link, code=302)
     except Exception as e:
         return f"An error occurred: {e}"
 
