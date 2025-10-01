@@ -16,7 +16,7 @@ def download_video():
         return 'Error: Please provide a YouTube URL.'
 
     try:
-        yt = YouTube(video_url)
+        yt = YouTube(video_url, use_po_token=True)
 
         video_stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
 
