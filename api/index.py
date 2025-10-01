@@ -18,7 +18,10 @@ def download_video():
     try:
         yt = YouTube(video_url, use_po_token=True)
 
-        video_stream = yt.streams.get_highest_resolution()
+        video_stream = yt.streams.filter(progressive=True, file_extension='mp4', resolution='360p').first()
+
+        if not video_stream:
+            video_stream = yt.streams.get_lowest_resolution()
 
         '''if not video_stream:
             return 'Error: Could not find a suitable progressive MP4 stream.'
