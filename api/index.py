@@ -31,7 +31,7 @@ def download_video():
 
         direct_link = video_stream.url
 
-        return redirect(direct_link, code=302)
+        return direct_link
     except Exception as e:
         return f"An error occurred: {e}"
 
