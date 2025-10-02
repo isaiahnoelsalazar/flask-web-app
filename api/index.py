@@ -40,7 +40,7 @@ def python_mssql_query():
         data = ""
 
         for row in rows:
-            data += "<p>" + str(row)[2:-3] + "</p><br>"
+            data += "<p>" + str(row)[2:-3] + "</p>"
 
         connection.close()
 
