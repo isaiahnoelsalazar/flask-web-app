@@ -14,7 +14,7 @@ def about():
     return sys.version
 
 @app.route("/mssql")
-def pymssql():
+def python_mssql():
     try:
         server = 'sql.bsite.net\\MSSQL2016'
         database = 'saiasamazingaspsite_SampleDB'
