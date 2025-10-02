@@ -1,25 +1,33 @@
-from flask import Flask
+from flask import Flask, request
 import pymssql
 import traceback
 import sys
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
     return 'Hello'
+
 
 @app.route('/about')
 def about():
     return sys.version
 
+
 @app.route("/mssql")
 def python_mssql():
     try:
-        server = 'sql.bsite.net\\MSSQL2016'
-        database = 'saiasamazingaspsite_SampleDB'
-        username = 'saiasamazingaspsite_SampleDB'
-        password = 'DBSamplePW'
+        # server = 'sql.bsite.net\\MSSQL2016'
+        # database = 'saiasamazingaspsite_SampleDB'
+        # username = 'saiasamazingaspsite_SampleDB'
+        # password = 'DBSamplePW'
+
+        server = request.args.get("server")
+        database = request.args.get("database")
+        username = request.args.get("username")
+        password = request.args.get("password")
 
         connection = pymssql.connect(server, username, password, database)
 
@@ -36,4 +44,4 @@ def python_mssql():
 
         return allstr
     except:
-        return traceback.format_exc()
+        return "Connection broken. Please check your parameters again."
