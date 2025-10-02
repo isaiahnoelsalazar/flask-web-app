@@ -37,10 +37,12 @@ def python_mssql_query():
         cursor.execute(query)
         rows = cursor.fetchall()
 
-        data = ""
+        data = "<style>body{margin:0;padding:0;}p{margin:0;}row-container{display:flex;flex-direction:column;gap:8px;}</style><div id='row-container'>"
 
         for row in rows:
             data += "<p>" + str(row)[2:-3] + "</p>"
+
+        data += "</div>"
 
         connection.close()
 
