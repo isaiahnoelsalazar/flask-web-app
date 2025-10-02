@@ -20,7 +20,7 @@ def pymssql():
         username = 'saiasamazingaspsite_SampleDB'
         password = 'DBSamplePW'
 
-        connection = pymssql.connect(server, username, password, database)
+        connection = pymssql._pymssql.connect(server, username, password, database)
 
         cursor = connection.cursor()
         cursor.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'")
