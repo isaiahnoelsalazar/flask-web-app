@@ -1,5 +1,6 @@
 from flask import Flask
 import pymssql
+import traceback
 
 app = Flask(__name__)
 
@@ -33,5 +34,5 @@ def pymssql():
         connection.close()
 
         return allstr
-    except Exception as e:
-        return str(e)
+    except:
+        return traceback.format_exc()
