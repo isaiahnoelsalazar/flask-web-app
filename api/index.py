@@ -16,8 +16,8 @@ def about():
     return sys.version
 
 
-@app.route("/mssql")
-def python_mssql():
+@app.route("/mssql_query")
+def python_mssql_query():
     try:
         # server = 'sql.bsite.net\\MSSQL2016'
         # database = 'saiasamazingaspsite_SampleDB'
@@ -28,20 +28,22 @@ def python_mssql():
         database = request.args.get("database")
         username = request.args.get("username")
         password = request.args.get("password")
+        query = request.args.get("query")
 
         connection = pymssql.connect(server, username, password, database)
 
         cursor = connection.cursor()
-        cursor.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'")
+        # cursor.execute("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'")
+        cursor.execute(query)
         rows = cursor.fetchall()
 
-        allstr = ""
+        data = ""
 
         for row in rows:
-            allstr += str(row)[2:-3] + "\n"
+            data += "<p>" + str(row)[2:-3] + "</p><br>"
 
         connection.close()
 
-        return allstr
+        return data
     except:
         return "Connection broken. Please check your parameters again."
