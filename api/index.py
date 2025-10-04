@@ -42,3 +42,24 @@ def python_mssql_query():
         return data
     except:
         return "Connection broken. Please check your parameters again."
+
+
+@app.route("/mssql_execute")
+def python_mssql_execute():
+    try:
+        server = request.args.get("server")
+        database = request.args.get("database")
+        username = request.args.get("username")
+        password = request.args.get("password")
+        execute = request.args.get("execute")
+
+        connection = pymssql.connect(server, username, password, database)
+
+        cursor = connection.cursor()
+        cursor.execute(execute)
+        connection.commit()
+        connection.close()
+
+        return "Command completed."
+    except:
+        return "Connection broken. Please check your parameters again."
