@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import pymssql
 import sys
 
@@ -8,6 +8,11 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return 'Hello'
+
+
+@app.route('/test')
+def home():
+    return render_template("test.html")
 
 
 @app.route('/about')
