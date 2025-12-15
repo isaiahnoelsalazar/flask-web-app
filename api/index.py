@@ -42,6 +42,8 @@ def python_mssql_query():
 
         data += "</div>"'''
 
+        data = ""
+        
         for row in rows:
             data += str(row) + "\n"
 
