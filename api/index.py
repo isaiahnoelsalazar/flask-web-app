@@ -38,7 +38,7 @@ def python_mssql_query():
         data = "<style>body{margin:0;padding:0;}p{margin:0;}#row-container{display:flex;flex-direction:column;}</style><div id='row-container'>"
 
         for row in rows:
-            data += "<p>" + str(row)[2:-3] + "</p>"
+            data += "<p>" + str(row) + "</p>"
 
         data += "</div>"
 
