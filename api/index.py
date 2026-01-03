@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import pymssql
 import sys
 
@@ -35,24 +35,17 @@ def python_mssql_query():
         cursor.execute(query)
         rows = cursor.fetchall()
 
-        '''data = "<style>body{margin:0;padding:0;}p{margin:0;}#row-container{display:flex;flex-direction:column;}</style><div id='row-container'>"
-
-        for row in rows:
-            data += "<p>" + str(row) + "</p>"
-
-        data += "</div>"'''
-
-        data = "{\"response_data\": \""
+        data = ""
         
         for row in rows:
             data += str(row) + ","
 
-        data = data.strip()[:-1] + "\"}"
+        data = {"response_data": data.strip()[:-1]}
         connection.close()
 
-        return data
+        return jsonify(data)
     except:
-        return "{\"response_data\": \"Connection broken. Please check your parameters again.\"}"
+        return jsonify({"response_data": "Connection broken. Please check your parameters again."})
 
 
 @app.route("/mssql_execute")
@@ -71,6 +64,6 @@ def python_mssql_execute():
         connection.commit()
         connection.close()
 
-        return "{\"response_data\": \"Command completed.\"}"
+        return jsonify({"response_data": "Command completed."})
     except:
-        return "{\"response_data\": \"Connection broken. Please check your parameters again.\"}"
+        return jsonify({"response_data": "Connection broken. Please check your parameters again."})
