@@ -42,12 +42,12 @@ def python_mssql_query():
 
         data += "</div>"'''
 
-        data = "{\"response_data\":"
+        data = "{\"response_data\":{"
         
         for row in rows:
-            data += "{\"row\":\"" + str(row) + "\"},\n"
+            data += "\"row\":\"" + str(row) + "\",\n"
 
-        data = data.strip()[:-1] + "}"
+        data = data.strip()[:-1] + "}}"
         connection.close()
 
         return data
