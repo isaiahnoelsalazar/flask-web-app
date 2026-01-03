@@ -58,8 +58,8 @@ def python_mssql_query():
         connection.close()
 
         return jsonify(data)
-    except:
-        return jsonify({"response_data": "Connection broken. Please check your parameters again."})
+    except Exception as e:
+        return jsonify({"response_data": str(e)})
 
 
 @app.route("/mssql_execute")
