@@ -45,7 +45,7 @@ def python_mssql_query():
         data = "{\"response_data\":{"
         
         for row in range(len(rows)):
-            data += "\"row" + row + "\":\"" + str(rows[row]) + "\",\n"
+            data += "\"row" + str(row) + "\":\"" + str(rows[row]) + "\",\n"
 
         data = data.strip()[:-1] + "}}"
         connection.close()
