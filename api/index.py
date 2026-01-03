@@ -42,16 +42,17 @@ def python_mssql_query():
 
         data += "</div>"'''
 
-        data = ""
+        data = "{"
         
         for row in rows:
-            data += str(row) + "\n"
+            data += "{\"row\":\"" + str(row) + "\"},\n"
 
+        data = data.strip()[:-1] + "}"
         connection.close()
 
         return data
     except:
-        return "Connection broken. Please check your parameters again."
+        return "{{\"row\": \"Connection broken. Please check your parameters again.\"}}"
 
 
 @app.route("/mssql_execute")
@@ -70,6 +71,6 @@ def python_mssql_execute():
         connection.commit()
         connection.close()
 
-        return "Command completed."
+        return "{{\"row\": \"Command completed.\"}}"
     except:
-        return "Connection broken. Please check your parameters again."
+        return "{{\"row\": \"Connection broken. Please check your parameters again.\"}}"
