@@ -1,8 +1,17 @@
 from flask import Flask, request, render_template, jsonify
+from flask_cors import CORS
 import pymssql
 import sys
 
 app = Flask(__name__)
+
+CORS(app, resources={
+    r"/*": {
+        "origins": ["https://ass-olive.vercel.app"],
+        "allow_headers": ["Content-Type", "x-vercel-protection-bypass"],
+        "methods": ["GET", "POST", "OPTIONS"]
+    }
+})
 
 
 @app.route('/')
