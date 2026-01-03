@@ -15,6 +15,11 @@ def test():
     return render_template("test.html")
 
 
+@app.route('/test-json')
+def test_json():
+    return jsonify({"response_data": "Test JSON"})
+
+
 @app.route('/about')
 def about():
     return sys.version
